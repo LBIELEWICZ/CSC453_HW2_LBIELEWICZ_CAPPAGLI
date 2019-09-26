@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.String;
 
 public class EvalParser {
-  Scanner scan;
+  Scanner scan = new Scanner();
 
   int tempID = 0;
   String threeAddressResult = "";
@@ -18,6 +18,8 @@ public class EvalParser {
 
   /* TODO #1: Write a parser that can evaluate expressions */
   public int evaluateExpression(String eval){
+    LinkedList<Token> tokens = scan.extractTokenList(eval);
+    //todo
     return 0;
   }
 

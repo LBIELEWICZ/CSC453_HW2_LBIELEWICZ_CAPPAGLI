@@ -119,11 +119,24 @@ public class Scanner{
 
   	while(stream.length() > 0){
   		Token nextToken = extractToken(stream);
-                if (nextToken != null)
+      if (nextToken != null)
   		  result += nextToken.toString();
   	}
 
     return result;
+  }
+
+  public LinkedList<Token> extractTokenList(String arg){
+    StringBuilder stream = new StringBuilder(arg);
+    LinkedList<Token> tokens = new LinkedList<Token>();
+    
+    while(stream.length() > 0){
+      Token nextToken = extractToken(stream);
+      if (nextToken != null)
+        tokens.add(nextToken);
+    }
+
+    return tokens;
   }
 
 }
