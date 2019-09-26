@@ -1,16 +1,18 @@
 import java.util.LinkedList;
 
-enum TokenType{
-      NUM, PLUS, MINUS, MUL, DIV, LT, LTE, GT, GTE, OP, CP;
-}
-
 class Token{
+  enum TokenType{
+    NUM, PLUS, MINUS, MUL, DIV, LT, LTE, GT, GTE, OP, CP;
+  }
+
   TokenType tokenType;
   String tokenVal;
+
   public Token(TokenType tokenType, String tokenVal){
     this.tokenType = tokenType;
     this.tokenVal = tokenVal;
   }
+
   public String toString(){
     return "|" + this.tokenType + ": " + this.tokenVal + "|";
   }
@@ -44,30 +46,30 @@ public class Scanner{
         tokChar = stream.charAt(itr);
       }
       
-      ret = new Token(TokenType.NUM, num);
+      ret = new Token(Token.TokenType.NUM, num);
     }
 
     // Handling a PLUS token
     else if (tokChar == '+') {
-      ret = new Token(TokenType.PLUS, "+");
+      ret = new Token(Token.TokenType.PLUS, "+");
       itr++;
     }
 
     // Handling a MINUS token
     else if (tokChar == '-') {
-      ret = new Token(TokenType.MINUS, "-");
+      ret = new Token(Token.TokenType.MINUS, "-");
       itr++;
     }
 
     // Handling a MUL token
     else if (tokChar == '*') {
-      ret = new Token(TokenType.MUL, "*");
+      ret = new Token(Token.TokenType.MUL, "*");
       itr++;
     }
 
     // Handling a DIV token
     else if (tokChar == '/') {
-      ret = new Token(TokenType.DIV, "/");
+      ret = new Token(Token.TokenType.DIV, "/");
       itr++;
     }
 
@@ -75,10 +77,10 @@ public class Scanner{
     else if (tokChar == '<') {
       if (stream.length() > 1 && stream.charAt(itr + 1) == '=') {
         itr++;
-        ret = new Token(TokenType.LTE, "<=");
+        ret = new Token(Token.TokenType.LTE, "<=");
       }
       else
-        ret = new Token(TokenType.LT, "<");
+        ret = new Token(Token.TokenType.LT, "<");
       itr++;
     }
 
@@ -86,22 +88,22 @@ public class Scanner{
     else if (tokChar == '>') {
       if (stream.length() > 1 && stream.charAt(itr + 1) == '=') {
         itr++;
-        ret = new Token(TokenType.GTE, ">=");
+        ret = new Token(Token.TokenType.GTE, ">=");
       }
       else
-        ret = new Token(TokenType.GT, ">");
+        ret = new Token(Token.TokenType.GT, ">");
       itr++;
     }
 
     // Handling a OP token
     else if (tokChar == '(') {
-      ret = new Token(TokenType.OP, "(");
+      ret = new Token(Token.TokenType.OP, "(");
       itr++;
     }
 
     // Handling a CP token
     else if (tokChar == ')') {
-      ret = new Token(TokenType.CP, ")");
+      ret = new Token(Token.TokenType.CP, ")");
       itr++;
     }
     

@@ -29,10 +29,10 @@ public class EvalParser {
     int r;
     r = evaluateT(tokens);
     while(true){ // E'
-      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.PLUS){
+      if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.PLUS){
         tokens.remove(); //match('+');
         r = r + evaluateT(tokens);
-      }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.MINUS){
+      }else if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.MINUS){
         tokens.remove(); //match('-');
         r = r - evaluateT(tokens);
       }else{
@@ -47,10 +47,10 @@ public class EvalParser {
     int r;
     r = evaluateF(tokens);
     while(true){ // T'
-      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.MUL){
+      if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.MUL){
         tokens.remove(); //match('*');
         r = r * evaluateF(tokens);
-      }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.DIV){
+      }else if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.DIV){
         tokens.remove(); //match('/');
         r = r / evaluateF(tokens);
       }else{
@@ -63,16 +63,16 @@ public class EvalParser {
   // Evaluating F
   private int evaluateF(LinkedList<Token> tokens){
     int r = 0;
-    if(tokens.peek() != null && tokens.peek().tokenType == TokenType.OP){
+    if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.OP){
       tokens.remove(); //match('(');
       r = evaluateE(tokens);
-      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.CP){
+      if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.CP){
         tokens.remove(); //match(')');
       }else{
         System.out.println("ERROR: Not in the grammer.");
         System.exit(1);
       }
-    }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.NUM){
+    }else if(tokens.peek() != null && tokens.peek().tokenType == Token.TokenType.NUM){
       r = Integer.parseInt(tokens.remove().tokenVal); //match(number);
     }else{
        System.out.println("ERROR: Not in the grammer.");

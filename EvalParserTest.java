@@ -35,6 +35,14 @@ public class EvalParserTest{
     // Logan: Test nested parentheses
     eval = "(((1+1)*2)-3)";
     assert(parser.evaluateExpression(eval) == 1);
+
+    // Carly: Test parentheses with only one number inside
+    eval = "(5)";
+    assert(parser.evaluateExpression(eval) == 5);
+
+    // Carly: Test division
+    eval = "6 / 2";
+    assert(parser.evaluateExpression(eval) == 3);
     
    System.out.println("Additional Expression Evaluation Tests Passed");
   }
