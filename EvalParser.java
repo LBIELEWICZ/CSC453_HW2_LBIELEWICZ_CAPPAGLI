@@ -20,21 +20,21 @@ public class EvalParser {
   /* TODO #1: Write a parser that can evaluate expressions */
   public int evaluateExpression(String eval){
     LinkedList<Token> tokens = scan.extractTokenList(eval);
-    int result = //todo
-    return 0;
+    int result = evaluateE(tokens);
+    return result;
   }
 
   // Evaluating E/E'
   private int evaluateE(LinkedList<Token> tokens){
     int r;
-    r = T(tokens);
+    r = evaluateT(tokens);
     while(true){ // E'
-      if(tokens.peek().tokenType == TokenType.PLUS){
+      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.PLUS){
         tokens.remove(); //match('+');
-        r = r + T(tokens);
-      }else if(tokens.peek().tokenType == TokenType.MINUS){
+        r = r + evaluateT(tokens);
+      }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.MINUS){
         tokens.remove(); //match('-');
-        r = r - T(tokens);
+        r = r - evaluateT(tokens);
       }else{
         break;
       }
@@ -45,14 +45,14 @@ public class EvalParser {
   // Evaluating T/T'
   private int evaluateT(LinkedList<Token> tokens){
     int r;
-    r = F(tokens);
+    r = evaluateF(tokens);
     while(true){ // T'
-      if(tokens.peek().tokenType == TokenType.MUL){
+      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.MUL){
         tokens.remove(); //match('*');
-        r = r * F(tokens);
-      }else if(tokens.peek().tokenType == TokenType.DIV){
+        r = r * evaluateF(tokens);
+      }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.DIV){
         tokens.remove(); //match('/');
-        r = r / F(tokens);
+        r = r / evaluateF(tokens);
       }else{
         break;
       }
@@ -62,18 +62,18 @@ public class EvalParser {
 
   // Evaluating F
   private int evaluateF(LinkedList<Token> tokens){
-    int r;
-    if(tokens.peek().tokenType == TokenType.OP){
+    int r = 0;
+    if(tokens.peek() != null && tokens.peek().tokenType == TokenType.OP){
       tokens.remove(); //match('(');
-      r = E(tokens);
-      if(tokens.peek().tokenType == TokenType.CP){
+      r = evaluateE(tokens);
+      if(tokens.peek() != null && tokens.peek().tokenType == TokenType.CP){
         tokens.remove(); //match(')');
       }else{
         System.out.println("ERROR: Not in the grammer.");
         System.exit(1);
       }
-    }else if(tokens.peek().tokenType == TokenType.NUM){
-      r = tokens.remove().tokenVal; //match(number);
+    }else if(tokens.peek() != null && tokens.peek().tokenType == TokenType.NUM){
+      r = Integer.parseInt(tokens.remove().tokenVal); //match(number);
     }else{
        System.out.println("ERROR: Not in the grammer.");
        System.exit(1);
