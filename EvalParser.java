@@ -23,6 +23,57 @@ public class EvalParser {
     return 0;
   }
 
+  // Parsing E/E'
+  private void E(LinkedList<Token> tokens){
+    T();
+    while(true){ // E'
+      if(tokens.peek().tokenType == TokenType.PLUS){
+        tokens.remove(); //match('+');
+        T();
+      }else if(tokens.peek().tokenType == TokenType.MINUS){
+        tokens.remove(); //match('-');
+        T();
+      }else{
+        break;
+      }
+    }
+  }
+
+  // Parsing T/T'
+  private void T(LinkedList<Token> tokens){
+    F();
+    while(true){ // T'
+      if(tokens.peek().tokenType == TokenType.MUL){
+        tokens.remove(); //match('*');
+        F();
+      }else if(tokens.peek().tokenType == TokenType.DIV){
+        tokens.remove(); //match('/');
+        F();
+      }else{
+        break;
+      }
+    }
+  }
+
+  // Parsing F
+  private void F(LinkedList<Token> tokens){
+    if(tokens.peek().tokenType == TokenType.OP){
+      tokens.remove(); //match('(');
+      E();
+      if(tokens.peek().tokenType == TokenType.CP){
+        tokens.remove(); //match(')');
+      }else{
+        System.out.println("ERROR: Not in the grammer.");
+        System.exit(1);
+      }
+    }else if(tokens.peek().tokenType == TokenType.NUM){
+      tokens.remove(); //match(number);
+    }else{
+       System.out.println("ERROR: Not in the grammer.");
+       System.exit(1);
+    }
+  }
+
   /* TODO #2: Now add three address translation to your parser*/
   public String getThreeAddr(String eval){
     this.threeAddressResult = "";
