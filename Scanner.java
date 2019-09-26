@@ -1,6 +1,6 @@
 public class Scanner{
   enum TokenType{
-      NUM, PLUS, MINUS, MUL, DIV, LT, LTE, GT, GTE;
+      NUM, PLUS, MINUS, MUL, DIV, LT, LTE, GT, GTE, LPAR, RPAR;
   }
 
   class Token{
@@ -88,6 +88,18 @@ public class Scanner{
       }
       else
         ret = new Token(TokenType.GT, ">");
+      itr++;
+    }
+    
+    // Handling a LPAR token
+    else if (tokChar == '(') {
+      ret = new Token(TokenType.LPAR, "(");
+      itr++;
+    }
+    
+    // Handling an RPAR token
+    else if (tokChar == ')') {
+      ret = new Token(TokenType.RPAR, ")");
       itr++;
     }
     
