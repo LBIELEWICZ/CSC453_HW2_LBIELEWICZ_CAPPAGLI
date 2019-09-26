@@ -1,20 +1,22 @@
-public class Scanner{
-  enum TokenType{
+import java.util.LinkedList;
+
+enum TokenType{
       NUM, PLUS, MINUS, MUL, DIV, LT, LTE, GT, GTE, OP, CP;
-  }
+}
 
-  class Token{
-    TokenType tokenType;
-    String tokenVal;
-    public Token(TokenType tokenType, String tokenVal){
-      this.tokenType = tokenType;
-      this.tokenVal = tokenVal;
-    }
-    public String toString(){
-      return "|" + this.tokenType + ": " + this.tokenVal + "|";
-    }
+class Token{
+  TokenType tokenType;
+  String tokenVal;
+  public Token(TokenType tokenType, String tokenVal){
+    this.tokenType = tokenType;
+    this.tokenVal = tokenVal;
   }
+  public String toString(){
+    return "|" + this.tokenType + ": " + this.tokenVal + "|";
+  }
+}
 
+public class Scanner{
   public Token extractToken(StringBuilder stream){
     int itr = 0;
     char tokChar = stream.charAt(itr);
