@@ -119,6 +119,25 @@ public class EvalParserTest{
              "temp13 = temp9 / temp12\n"+
              "temp14 = temp6 - temp13\n";
     assert(parser.getThreeAddr(eval).equals(result));
+
+    // Carly: Test long mixed expresion without parethesis
+    eval = "1 + 2 * 3 + 3 - 7 - 1 / 3 * 2";
+    result = "temp0 = 1\n"+
+             "temp1 = 2\n"+
+             "temp2 = 3\n"+
+             "temp3 = temp1 * temp2\n"+
+             "temp4 = temp0 + temp3\n"+
+             "temp5 = 3\n"+
+             "temp6 = temp4 + temp5\n"+
+             "temp7 = 7\n"+
+             "temp8 = temp6 - temp7\n"+
+             "temp9 = 1\n"+
+             "temp10 = 3\n"+
+             "temp11 = temp9 / temp10\n"+
+             "temp12 = 2\n"+
+             "temp13 = temp11 * temp12\n"+
+             "temp14 = temp8 - temp13\n";
+    assert(parser.getThreeAddr(eval).equals(result));
   }
 
   public static void main(String[] args){
